@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>동아리연합회 회원 인정 여부 확인</title>
+  <style>
+    :root {
+      --bg: #D6EDFB;
+      --card: #ffffff;
+      --border: #e4e6eb;
+      --text: #1c1e21;
+      --muted: #8a8f98;
+      --accent: #2d2d2d;
+      --accent-hover: #111111;
+      --ok-bg: #eaf7ee;
+      --ok-text: #1a7a35;
+      --no-bg: #fdecea;
+      --no-text: #b3261e;
+      --info-bg: #eef1f5;
+      --info-text: #4a4f57;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 36px 32px;
+    }
+
+    .logo {
+      display: block;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+    }
+
+    .eyebrow {
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin: 0 0 8px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 28px 0 6px;
+    }
+
+    p.sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.6;
+      margin: 0 0 40px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4a4f57;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    label:first-of-type { margin-top: 0; }
+
+    input {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--text);
+      background: #fafafa;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #8a8f98;
+      background: #ffffff;
+    }
+
+    .notice {
+      margin: 6px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 13px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button:hover:not(:disabled) { background: var(--accent-hover); }
+    button:disabled { background: #c7c9cd; cursor: default; }
+
+    #result {
+      margin-top: 24px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      display: none;
+    }
+
+    .ok   { background: var(--ok-bg);   color: var(--ok-text); }
+    .no   { background: var(--no-bg);   color: var(--no-text); }
+    .info { background: var(--info-bg); color: var(--info-text); }
+
+    .corner-cat {
+      position: absolute;
+      top: 0;
+      left: 16px;
+      width: 148px;
+      height: 148px;
+      transform: translate(-50%, -50%) rotate(-10deg);
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+      pointer-events: none;
+      animation: cat-bounce 3.5s ease-in-out infinite;
+    }
+
+    @keyframes cat-bounce {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-10deg) translateY(0); }
+      50% { transform: translate(-50%, -50%) rotate(-10deg) translateY(-4px); }
+    }
+
+    .cat-bubble {
+      position: absolute;
+      top: -68px;
+      left: 128px;
+      white-space: nowrap;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      pointer-events: none;
+    }
+
+    .cat-bubble::after {
+      content: '';
+      position: absolute;
+      left: 18px;
+      bottom: -8px;
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 9px solid #ffffff;
+    }
+
+    @media (max-width: 480px) {
+      .corner-cat { width: 100px; height: 100px; left: 12px; }
+      .cat-bubble { left: 92px; top: -52px; font-size: 11px; padding: 6px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <svg class="corner-cat" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 38 L26 8 L42 34 Z" fill="#8FADD9"/>
+      <path d="M82 38 L74 8 L58 34 Z" fill="#8FADD9"/>
+      <path d="M23 33 L28 16 L37 32 Z" fill="#F3C98B"/>
+      <path d="M77 33 L72 16 L63 32 Z" fill="#F3C98B"/>
+      <circle cx="50" cy="58" r="34" fill="#A7D5F2" stroke="#ffffff" stroke-width="3"/>
+      <circle cx="39" cy="55" r="3.4" fill="#2d2d2d"/>
+      <circle cx="61" cy="55" r="3.4" fill="#2d2d2d"/>
+      <path d="M46 64 L54 64 L50 69 Z" fill="#E8925C"/>
+      <path d="M50 69 Q45 74 39 70" stroke="#2d2d2d" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <path d="M50 69 Q55 74 61 70" stroke="#2d2d2d" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <line x1="6" y1="54" x2="29" y2="57" stroke="#5b5f66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="6" y1="63" x2="29" y2="63" stroke="#5b5f66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="94" y1="54" x2="71" y2="57" stroke="#5b5f66" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="94" y1="63" x2="71" y2="63" stroke="#5b5f66" stroke-width="1.4" stroke-linecap="round"/>
+      <ellipse cx="30" cy="66" rx="4.5" ry="3" fill="#F5B9C4" opacity="0.7"/>
+      <ellipse cx="70" cy="66" rx="4.5" ry="3" fill="#F5B9C4" opacity="0.7"/>
+    </svg>
+    <div class="cat-bubble">야르렁~ 나는 동아리연합회장 김동현이다옹</div>
+    <h1>2026-2 동아리연합회 회원 확인</h1>
+    <p class="eyebrow">제 41대 동아리연합회 사무회계국</p>
+    <img class="logo" src="/logo.png" alt="동아리연합회 로고">
+
+    <form id="checkForm">
+      <label>학번</label>
+      <input type="text" id="studentId" inputmode="numeric" placeholder="학번을 입력하세요">
+
+      <label>이름</label>
+      <input type="text" id="name" placeholder="이름을 입력하세요">
+
+      <label>전화번호 뒷자리 (4자리)</label>
+      <input type="text" id="phone" inputmode="numeric" maxlength="4" placeholder="예: 1234">
+      <p class="notice">*회원 인정 조건: 개인정보 제공 및 이용 동의서 정보 = 대표자 제출 자료 정보</p>
+
+      <button id="submitBtn" type="submit">확인하기</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('checkForm');
+    const btn = document.getElementById('submitBtn');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const studentId = document.getElementById('studentId').value;
+      const name = document.getElementById('name').value;
+      const phoneLast4 = document.getElementById('phone').value;
+
+      btn.disabled = true;
+      btn.innerText = '확인 중...';
+      result.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ studentId, name, phoneLast4 })
+        });
+        const data = await res.json();
+
+        result.style.display = 'block';
+        result.className = data.status === 'found' ? 'ok'
+          : data.status === 'not_found' ? 'no'
+          : 'info';
+        result.innerText = data.message;
+      } catch (err) {
+        result.style.display = 'block';
+        result.className = 'no';
+        result.innerText = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = '확인하기';
+      }
+    });
+  </script>
+</body>
+</html>
