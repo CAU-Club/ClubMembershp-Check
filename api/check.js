@@ -1,15 +1,9 @@
 const crypto = require('crypto');
 const data = require('../data/members.hashes.json');
-
-const MEMBERS = data.members; // 해시 -> 가입 동아리명 목록
+const MEMBERS = data.members;
 const PEPPER = process.env.HASH_PEPPER;
-
 const MAX_ATTEMPTS = 5;
 const LOCK_MS = 10 * 60 * 1000;
-
-// 메모리 기반 시도 횟수 기록입니다. 서버리스 함수 특성상 인스턴스가 여러 개면
-// 인스턴스별로 따로 카운트되므로 완벽한 방어는 아니지만, 기본적인 무차별 대입
-// 시도를 늦추는 용도로는 충분합니다.
 const attempts = new Map();
 
 function digitsOnly(value) {
