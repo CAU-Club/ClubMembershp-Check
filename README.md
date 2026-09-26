@@ -40,9 +40,9 @@ webapp/
 
 1. 새 `회원명단.xlsx`로 교체
 2. cd webapp
-3. $env:HASH_PEPPER="(.env에 있는 값)"
+3. $env:HASH_PEPPER=".env에 있는 값"
 4. python scripts/build_data.py ../회원명단.xlsx
-5. `git add .
+5. git add .
 6. git commit -m "회원명단 갱신"
 7. git push
 

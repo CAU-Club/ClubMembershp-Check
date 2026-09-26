@@ -6,7 +6,7 @@
   <title>동아리연합회 회원 인정 여부 확인</title>
   <style>
     :root {
-      --bg: #FDE2EA;
+      --bg: #E7E8EA;
       --card: #ffffff;
       --border: #e4e6eb;
       --text: #1c1e21;
@@ -159,38 +159,8 @@
       50% { transform: translate(-50%, -50%) rotate(-10deg) translateY(-4px); }
     }
 
-    .cat-bubble {
-      position: absolute;
-      top: -68px;
-      left: 128px;
-      white-space: nowrap;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.4;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      pointer-events: none;
-    }
-
-    .cat-bubble::after {
-      content: '';
-      position: absolute;
-      left: 18px;
-      bottom: -8px;
-      width: 0;
-      height: 0;
-      border-left: 3px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 9px solid #ffffff;
-    }
-
     @media (max-width: 480px) {
       .corner-cat { width: 100px; height: 100px; left: 12px; }
-      .cat-bubble { left: 92px; top: -52px; font-size: 11px; padding: 6px 10px; }
     }
   </style>
 </head>
@@ -201,7 +171,7 @@
       <line x1="64" y1="44" x2="72" y2="14" stroke="#F5B8CB" stroke-width="22" stroke-linecap="round"/>
       <line x1="36" y1="44" x2="28" y2="16" stroke="#FCEAF0" stroke-width="11" stroke-linecap="round"/>
       <line x1="64" y1="44" x2="72" y2="16" stroke="#FCEAF0" stroke-width="11" stroke-linecap="round"/>
-      <circle cx="50" cy="58" r="34" fill="#FDE2EA" stroke="#ffffff" stroke-width="3"/>
+      <circle cx="50" cy="58" r="34" fill="#E7E8EA" stroke="#ffffff" stroke-width="3"/>
       <circle cx="39" cy="55" r="3.4" fill="#2d2d2d"/>
       <circle cx="61" cy="55" r="3.4" fill="#2d2d2d"/>
       <path d="M46 64 L54 64 L50 69 Z" fill="#E8899E"/>
@@ -214,7 +184,6 @@
       <ellipse cx="30" cy="66" rx="4.5" ry="3" fill="#F5A8BC" opacity="0.7"/>
       <ellipse cx="70" cy="66" rx="4.5" ry="3" fill="#F5A8BC" opacity="0.7"/>
     </svg>
-    <div class="cat-bubble">야르렁~ 나는 동아리연합회 부회장 김채은이당</div>
     <h1>2026-2 동아리연합회 회원 확인</h1>
     <p class="eyebrow">제 41대 동아리연합회 사무회계국</p>
     <img class="logo" src="/logo.png" alt="동아리연합회 로고">
